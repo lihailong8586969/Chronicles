@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
         printf("%s ", argv[i-1]);
     }
 
-    printf("sherk > ");
+    printf("... ...");
 
     getchar();
 
