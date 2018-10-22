@@ -1,3 +1,8 @@
+// https://segmentfault.com/q/1010000007176617
+// https://segmentfault.com/q/1010000010618249
+
+
+
 function sayKeyName(obj){      
   function sayName(obj){
     if (!(obj instanceof Array) && !(obj instanceof Object)) {
