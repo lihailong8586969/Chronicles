@@ -1,0 +1,8 @@
+CLASSPATH值为：%JAVA_HOME%\lib\tools.jar;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\bin;
+
+
+
+
+export  CLASSPATH=$(find `pwd` -name '*.jar' | xargs echo | tr ' ' ':')
+
+
