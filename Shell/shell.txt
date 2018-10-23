@@ -1,0 +1,80 @@
+#!bin/bash
+#filename=1
+
+
+# 使用read命令读取输入的值
+echo;echo;
+echo "请输入你的名字 : ";
+read name;
+echo hello : $name;
+
+
+# 直接给变量赋值
+echo;echo;
+name="EasonChan";
+echo name : $name;
+
+# 基本运算
+echo;echo;
+echo "基本运算如下 : ";
+let x=100;
+let y1=x+100;
+let y2=x-100;
+let y3=x*100;
+let y4=x/100;
+echo $x+100=$y1;
+echo $x-100=$y2;
+echo $x*100=$y3;
+echo $x/100=$y4;
+
+# 测试数值
+echo;echo;
+let x=100;
+let y=200;
+if test $x -lt $y;
+then echo "x<y";
+else echo "x>=y";
+fi;
+
+# if结构
+echo;echo;
+let s1="the_first_str";
+let s2="the_second_str";
+if test $s1 == $s2;
+then echo "s1和s2相同";
+else ehco "s1和s2不同";
+fi;
+
+
+# case 结构
+echo;echo;
+let week=5;
+case $week in
+0)echo "这个数是" $week;;
+1)echo "这个数是" $week;;
+2)echo "这个数是" $week;;
+3)echo "这个数是" $week;;
+4)echo "这个数是" $week;;
+5)echo "这个数是" $week;;
+esac;
+
+
+# select 结构
+echo;echo;
+select N in 周一 周二 周三 周四 周五 周六 周日
+do
+	case $N in
+	周一)echo "周一";;
+	周二)echo "周二" ;;
+	周三)echo "周三" ;;
+	周四)echo "周四" ;;
+	周五)echo "周五" ;;
+	周六)echo "周六" ;;
+	周日)echo "周日" ;;
+	*)echo "选择错误,退出!" # 不能加分号
+	break;
+	esac;
+done;
+
+
+# while 结构
