@@ -1,10 +1,3 @@
-/*************************************************************************
-    > File Name: no_mutex.c
-    > Author: couldtt(fyby)
-    > Mail: fuyunbiyi@gmail.com
-    > Created Time: 2013年12月15日 星期日 17时52分24秒
- ************************************************************************/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
