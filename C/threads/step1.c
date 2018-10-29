@@ -51,10 +51,10 @@ int main()
 }
 
 int print_message_function( void *ptr ) {
+
     int i = 0;
 
-    // 数设置的很大时，很明显地看出来各个线程依次执行
-    for (i; i<1000000; i++) {
+    for (i; i<100000; i++) {
 
         printf("%s:%d\n", (char *)ptr, i);
     }
