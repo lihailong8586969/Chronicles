@@ -22,6 +22,12 @@ var (
 	z      complex128 = cmplx.Sqrt(-5 + 12i)
 )
 
+// 包级别全局常量
+const (
+	Big   = 1 << 100
+	Small = Big >> 99
+)
+
 // 函数
 func add(x int, y int) int {
 
@@ -78,16 +84,70 @@ func main() {
 	fmt.Printf("v is of type %T and value = %d \n", v,v)
 
 	// 常量的定义与变量类似，只不过使用 const 关键字。
-
 	// 常量可以是字符、字符串、布尔或数字类型的值。
 	// 常量不能使用 := 语法定义。
 	const World = "世界"
 
-	// 可以直接省略括号
-	if (1<9) {
+	// 函数级别局部常量
+	const (
+		Big   = 1 << 100
+		Small = Big >> 99
+	)
+
+
+	// if 语句除了没有了 `( )` 之外（甚至强制不能使用它们），看起来跟 C 或者 Java 中的一样，而 `{ }` 是必须的。（耳熟吗？）
+	if 1<9 {
 
   		fmt.Println("the spice must flow");
 	}
+
+	// if 的便捷语句,跟 for 一样，`if` 语句可以在条件之前执行一个简单的语句, 由这个语句定义的变量的作用域仅在 if 范围之内。
+	if v := math.Pow(x, n); v < lim {
+		
+		return v
+	}
+
+	// if 和 else, 在 if 的便捷语句定义的变量同样可以在任何对应的 else 块中使用。
+	if v := math.Pow(x, n); v < lim {
+	
+		return v
+	} else {
+		fmt.Printf("%g >= %g\n", v, lim)
+	}
+
+	// defer , defer 语句会延迟函数的执行直到上层函数返回。 延迟调用的参数会立刻生成，但是在上层函数返回前函数都不会被调用。
+	defer fmt.Println("world")
+
+	// defer 栈 , 延迟的函数调用被压入一个栈中。当函数返回时， 会按照后进先出的顺序调用被延迟的函数调用。 阅读博文了解更多关于 defer 语句的信息。
+	for i := 0; i < 10; i++ {
+		defer fmt.Println(i)
+	}
+
+
+	// switch 一个结构体（`struct`）就是一个字段的集合。 除非以 fallthrough 语句结束，否则分支会自动终止。
+	switch os := runtime.GOOS; os {
+	case "darwin":
+		fmt.Println("OS X.")
+	case "linux":
+		fmt.Println("Linux.")
+	default:
+		// freebsd, openbsd,
+		// plan9, windows...
+		fmt.Printf("%s.", os)
+	}
+
+
+	// 没有条件的 switch, 没有条件的 switch 同 `switch true` 一样。 这一构造使得可以用更清晰的形式来编写长的 if-then-else 链。
+	t := time.Now()
+	switch {
+	case t.Hour() < 12:
+		fmt.Println("Good morning!")
+	case t.Hour() < 17:
+		fmt.Println("Good afternoon.")
+	default:
+		fmt.Println("Good evening.")
+	}
+
 
 	// 在导入了一个包之后，就可以用其导出的名称来调用它。在 Go 中，首字母大写的名称是被导出的。Foo 和 FOO 都是被导出的名称。名称 foo 是不会被导出的。
 	fmt.Println(math.Pi);
@@ -102,5 +162,32 @@ func main() {
 	fmt.Println(split(17));
 
 
+	// Go 只有一种循环结构——`for` 循环。
+	// 基本的 for 循环除了没有了 `( )` 之外（甚至强制不能使用它们），看起来跟 C 或者 Java 中做的一样，而 `{ }` 是必须的。
+	sum := 0
+	for i := 0; i < 10; i++ {
+		sum += i
+	}
+	fmt.Println(sum)
+
+
+	// 跟 C 或者 Java 中一样，可以让前置、后置语句为空。
+	sum := 1
+	for ; sum < 1000; {
+		sum += sum
+	}
+	fmt.Println(sum)
+
+	// for 是 Go 的 “while”, 基于此可以省略分号：C 的 while 在 Go 中叫做 `for`。
+	sum := 1
+	for sum < 1000 {
+		sum += sum
+	}
+	fmt.Println(sum)
+
+	// 如果省略了循环条件，循环就不会结束，因此可以用更简洁地形式表达死循环。
+	for{
+
+	}
 }
 
