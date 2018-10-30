@@ -1,6 +1,8 @@
 <?php
 
 // 普通
+// 未使用生成器时： createRange 函数内的 for 循环结果被很快放到 $data 中，并且立即返回。
+// 所以， foreach 循环的是一个固定的数组。
 function createRange($number){
     $data = [];
     for($i=0;$i<$number;$i++){
@@ -11,6 +13,8 @@ function createRange($number){
 
 
 
+// 使用生成器时： createRange 的值不是一次性快速生成，而是依赖于 foreach 循环。 
+// foreach 循环一次， for 执行一次。
 
 // 荷官( 赌场中发牌的人 )
 function dealer($peopleNum){
