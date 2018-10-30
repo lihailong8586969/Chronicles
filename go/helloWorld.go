@@ -11,6 +11,14 @@ import (
 // import "fmt"
 // import "math"
 
+
+// 包级别结构体
+type Vertex struct {
+	X int
+	Y int
+}
+
+
 // 包级别变量
 var c, python, java bool
 var i, j int = 1, 2
@@ -54,6 +62,23 @@ func split(sum int) (x, y int) {
 
 func main() {
 
+	// 函数级别结构体
+	type Vertex struct {
+		X int
+		Y int
+	}
+	v := Vertex{1, 2}
+	v.X = 4
+	fmt.Println(v.X)
+
+	// 结构体文法
+    // 结构体文法表示通过结构体字段的值作为列表来新分配一个结构体。
+	// 使用 Name: 语法可以仅列出部分字段。（字段名的顺序无关。）
+	// 特殊的前缀 & 返回一个指向结构体的指针。
+	v1 = Vertex{1, 2}  // 类型为 Vertex
+	v2 = Vertex{X: 1}  // Y:0 被省略
+	v3 = Vertex{}      // X:0 和 Y:0
+	p  = &Vertex{1, 2} // 类型为 *Vertex
 
 	// 函数级别变量
 	var c, python, java bool
@@ -185,9 +210,28 @@ func main() {
 	}
 	fmt.Println(sum)
 
-	// 如果省略了循环条件，循环就不会结束，因此可以用更简洁地形式表达死循环。
+	// 死循环 : 如果省略了循环条件，循环就不会结束，因此可以用更简洁地形式表达死循环。
 	for{
 
 	}
+
+
+
+
+	// 指针
+	i, j := 42, 2701
+	
+	p := &i         // point to i
+	fmt.Println(*p) // read i through the pointer
+	*p = 21         // set i through the pointer
+	fmt.Println(i)  // see the new value of i
+
+	p = &j         // point to j
+	*p = *p / 37   // divide j through the pointer
+	fmt.Println(j) // see the new value of j
+
+
+
+
 }
 
