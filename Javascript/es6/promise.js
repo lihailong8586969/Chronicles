@@ -1,3 +1,6 @@
+// https://segmentfault.com/a/1190000012806637
+
+
  setTimeout(function(){
      console.log('定时器开始啦')
  });
@@ -12,4 +15,21 @@
  });
  
  console.log('代码执行结束');
-    
+
+// 马上执行for循环啦
+// 代码执行结束
+// 执行then函数啦
+// 定时器开始啦
+
+
+new Promise(function(resolve){ 
+
+	console.log("Promise"); 
+
+	// 如果没有 resolve , 不执行 then
+	resolve();
+
+}).then(function(){ 
+
+	console.log("then") 
+})
