@@ -1,3 +1,5 @@
+// import 原理 : https://www.imooc.com/video/16850
+
 // 如果一个 main 包导入其他包，包被顺序导入
 
 // 如果导入的包中有依赖其他包( 包 B ) , 
