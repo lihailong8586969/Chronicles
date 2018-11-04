@@ -23,6 +23,8 @@ func main() {
 	man := Man{"jayChou",20}
 	fmt.Println(man.name)
 
+	// var man Man 声明
+	var man Man = Man{"jayCHou",30}
 
 	v := Vertex{1, 2}	
 	v.X = 4
