@@ -19,6 +19,9 @@ type Vertex struct {
 }
 
 
+type name string
+
+
 // 包级别变量
 var c, python, java bool
 var i, j int = 1, 2
@@ -80,6 +83,12 @@ func main() {
 	v3 = Vertex{}      // X:0 和 Y:0
 	p  = &Vertex{1, 2} // 类型为 *Vertex
 
+
+	// The type *T is a pointer to a T value. Its zero value is nil.
+	var p *int;
+
+
+
 	// 函数级别变量
 	var c, python, java bool
 	var c, python, java = true, false, "no!"
@@ -97,7 +106,7 @@ func main() {
 	k := 3
 	c, python, java := true, false, "no!"
 	i, j := 42, 2701
-	
+
 
 	var a = "string";
 	var b string = "runoob.com";
