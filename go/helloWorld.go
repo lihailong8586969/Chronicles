@@ -96,7 +96,8 @@ func main() {
 	// 函数外的每个语句都必须以关键字开始（`var`、`func`、等等），`:=` 结构不能使用在函数外。
 	k := 3
 	c, python, java := true, false, "no!"
-
+	i, j := 42, 2701
+	
 
 	var a = "string";
 	var b string = "runoob.com";
@@ -104,6 +105,8 @@ func main() {
 	fmt.Println("Hello, playground");
 
 	// 输出 : v is of type int and value = 98 
+	// := 是定义并赋值
+	// =  是重新赋值
 	v := 42 // 定义变量 v 并赋值
 	v = 98 // 重新给 v 赋值
 	fmt.Printf("v is of type %T and value = %d \n", v,v)
