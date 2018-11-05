@@ -1,0 +1,11 @@
+npm install express      # 本地安装
+npm install express -g   # 全局安装
+
+# 更新模块
+npm update express
+
+# 卸载模块
+npm uninstall express
+
+# 如果出现 npm err! Error: connect ECONNREFUSED 127.0.0.1:8087 
+npm config set proxy null
