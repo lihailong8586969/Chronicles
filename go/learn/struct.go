@@ -20,7 +20,7 @@ func main() {
 	man := Man{"jayChou"}
 
 	// 全部字段都初始化
-	man := Man{"jayChou",20}
+	man := Man{name:"jayChou",age:20}
 	fmt.Println(man.name)
 
 	// var man Man 声明
