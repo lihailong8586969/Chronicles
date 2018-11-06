@@ -64,6 +64,11 @@ func split(sum int) (x, y int) {
 
 func main() {
 
+	// 连续赋值
+	a, b, c := 12, 34, 334
+	fmt.Println(a,b,c)
+
+
 	// 函数级别结构体
 	type Vertex struct {
 		X int
