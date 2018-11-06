@@ -1,0 +1,533 @@
+Mysql 下载地址
+https://dev.mysql.com/downloads/mysql/ 
+
+1、连接Mysql
+格式： mysql -h主机地址 -u用户名 －p用户密码
+
+1、连接到本机上的MYSQL。
+首先打开DOS窗口，然后进入目录mysql\bin，再键入命令mysql -u root -p，回车后提示你输密码.注意用户名前可以有空格也可以没有空格，但是密码前必须没有空格，否则让你重新输入密码。
+
+如果刚安装好MYSQL，超级用户root是没有密码的，故直接回车即可进入到MYSQL中了，MYSQL的提示符是： mysql>
+
+2、连接到远程主机上的MYSQL。假设远程主机的IP为：110.110.110.110，用户名为root,密码为abcd123。则键入以下命令：
+    mysql -h110.110.110.110 -u root -p 123;（注:u与root之间可以不用加空格，其它也一样）
+
+3、退出MYSQL命令： exit （回车）
+
+2、修改密码
+格式：mysqladmin -u用户名 -p旧密码 password 新密码
+
+mysql -u root mysql
+set password for root@localhost=password('secret');
+flush privileges; 更新权限
+
+1、给root加个密码ab12。
+首先在DOS下进入目录mysql\bin，然后键入以下命令
+    mysqladmin -u root -password ab12
+注：因为开始时root没有密码，所以-p旧密码一项就可以省略了。
+
+2、再将root的密码改为djg345。
+    mysqladmin -u root -p ab12 password djg345
+
+3、增加新用户
+注意：和上面不同，下面的因为是MYSQL环境中的命令，所以后面都带一个分号作为命令结束符
+
+格式：grant select on 数据库.* to 用户名@登录主机 identified by “密码”
+
+1、增加一个用户test1密码为abc，让他可以在任何主机上登录，并对所有数据库有查询、插入、修改、删除的权限。首先用root用户连入MYSQL，然后键入以下命令：
+    grant select,insert,update,delete on *.* to [email=test1@”%]test1@”%[/email]” Identified by “abc”;
+
+但增加的用户是十分危险的，你想如某个人知道test1的密码，那么他就可以在internet上的任何一台电脑上登录你的mysql数据库并对你的数据可以为所欲为了，解决办法见2。
+
+2、增加一个用户test2密码为abc,让他只可以在localhost上登录，并可以对数据库mydb进行查询、插入、修改、删除的操作（localhost指本地主机，即MYSQL数据库所在的那台主机），这样用户即使用知道test2的密码，他也无法从internet上直接访问数据库，只能通过MYSQL主机上的web页来访问了。
+    grant select,insert,update,delete on mydb.* to [email=test2@localhost]test2@localhost[/email] identified by “abc”;
+
+刷新权限
+flush privileges
+
+如果你不想test2有密码，可以再打一个命令将密码消掉。
+    grant select,insert,update,delete on mydb.* to [email=test2@localhost]test2@localhost[/email] identified by “”;
+
+命令：create database <数据库名>
+命令：show databases （注意：最后有个s）
+命令：drop database <数据库名>
+命令： use <数据库名>
+命令：mysql> select database(); 选择当前数据库
+命令 : mysql> select version(); 显示mysql版本号
+命令 : mysql> select now(); 显示当前时间
+命令 : SELECT DAYOFMONTH(CURRENT_DATE); 显示日
+命令 : SELECT MONTH(CURRENT_DATE); 显示月
+命令 : SELECT YEAR(CURRENT_DATE); 显示年
+命令 : mysql> SELECT "welecome to my blog!";  显示字符串
+命令 : select ((4 * 4) / 10 ) + 25; 计算
+命令 : select CONCAT(f_name, " ", l_name)  AS Name from employee_data where title = 'Marketing Executive'; 拼接字符串
+命令：create table <表名> ( <字段名1> <类型1> [,..<字段名n> <类型n>]); 创建数据表
+eg: 创建一个MyClass表
+mysql> create table MyClass(
+> id int(4) not null primary key auto_increment,
+> name char(20) not null,
+> sex int(4) not null default '0',
+> degree double(16,2));
+命令 : mysql> desc MyStudents 查看表结构
+命令：drop table <表名>删除表
+命令 : mysql> insert into MyClass values(1,'Tom',96.45),(2,'Joan',82.99), (2,'Wang', 96.59); 插入数据
+命令： select <字段1，字段2，...> from < 表名 > where < 表达式 > 
+命令 : mysql> select * from MyClass; 查询所有数据
+命令 : mysql> select * from MyClass order by id limit 0,2; 限制前两行
+命令 : mysql> delete from MyClass where id=1; 删除数据
+命令 : mysql> update MyClass set name='Mary' where id=1; 更新数据
+
+命令：alter table 表名 add字段 类型 其他; 增加字段
+命令 : mysql> alter table MyClass add passtest int(4) default '0'
+
+ALTER DATABASE `test` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;    修改数据库编码的命令
+ALTER TABLE `menu` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin   修改表的编码的命令
+ALTER TABLE `menu` CHANGE `text` `text` TEXT CHARACTER SET utf8 COLLATE utf8_bin   修改表的编码的命令设置字符为UTF-8即可
+
+命令 : mysql> alter table employee add primary key(id); 加主关键字索引;
+alert table employees add collumn birthdate date [after | first | last name]
+命令 : mysql> alter table 表名 add unique 索引名 (字段名);
+命令 : mysql> alter table employee add unique emp_name2(cardnumber);加唯一限制条件的索引
+
+删除某个索引
+mysql> alter table 表名 drop index 索引名;
+例子： mysql>alter table employee drop index emp_name;
+
+修改原字段名称及类型：
+mysql> ALTER TABLE table_name CHANGE old_field_name new_field_name field_type;
+
+命令：rename table 原表名 to 新表名; 修改表名;
+
+create table employees2 select * from employees; 复制表
+create table employees2 select name, phone from employees; 如果只需要一部分内容
+create temporary table emp_temp select * from employees; 创建临时表, 得有权限
+
+drop [temporary] table [if exists] table_name [, table_name, ...]
+
+
+1.导出整个数据库
+导出文件默认是存在mysql\bin目录下
+    mysqldump -u 用户名 -p 数据库名 > 导出的文件名
+    mysqldump -u user_name -p123456 database_name > outfile_name.sql
+
+2.导出一个表
+    mysqldump -u 用户名 -p 数据库名 表名> 导出的文件名
+    mysqldump -u user_name -p database_name table_name > outfile_name.sql
+
+3.导出一个数据库结构
+    mysqldump -u user_name -p -d –add-drop-table database_name > outfile_name.sql
+    -d 没有数据 –add-drop-table 在每个create语句之前增加一个drop table
+
+4.带语言参数导出
+    mysqldump -uroot -p –default-character-set=latin1 –set-charset=gbk –skip-opt database_name > outfile_name.sql
+
+例如，将aaa库备份到文件back_aaa中：
+　　[root@test1 root]# cd　/home/data/mysql
+　　[root@test1 mysql]# mysqldump -u root -p --opt aaa > back_aaa
+
+7.1 一个建库和建表的实例1
+drop database if exists school; //如果存在SCHOOL则删除
+create database school; //建立库SCHOOL
+use school; //打开库SCHOOL
+create table teacher //建立表TEACHER
+(
+    id int(3) auto_increment not null primary key,
+    name char(10) not null,
+    address varchar(50) default ‘深圳’,
+    year date
+); //建表结束
+
+//以下为插入字段
+insert into teacher values(”,’allen’,'大连一中’,'1976-10-10′);
+insert into teacher values(”,’jack’,'大连二中’,'1975-12-23′);
+
+如果你在mysql提示符键入上面的命令也可以，但不方便调试。
+1、你可以将以上命令原样写入一个文本文件中，假设为school.sql，然后复制到c:\\下，并在DOS状态进入目录[url=file://\\mysql\\bin]\\mysql\\bin[/url]，然后键入以下命令：
+    mysql -uroot -p密码 < c:\\school.sql
+如果成功，空出一行无任何显示；如有错误，会有提示。（以上命令已经调试，你只要将//的注释去掉即可使用）。
+
+2、或者进入命令行后使用 mysql> source c:\\school.sql; 也可以将school.sql文件导入数据库中。
+
+7.2 一个建库和建表的实例2
+drop database if exists school; //如果存在SCHOOL则删除
+create database school; //建立库SCHOOL
+use school; //打开库SCHOOL
+create table teacher //建立表TEACHER
+(
+    id int(3) auto_increment not null primary key,
+    name char(10) not null,
+    address varchar(50) default ''深圳'',
+    year date
+); //建表结束
+
+//以下为插入字段
+insert into teacher values('''',''glchengang'',''深圳一中'',''1976-10-10'');
+insert into teacher values('''',''jack'',''深圳一中'',''1975-12-23'');
+
+注：在建表中
+1、将ID设为长度为3的数字字段:int(3)；并让它每个记录自动加一:auto_increment；并不能为空:not null；而且让他成为主字段primary key。
+
+2、将NAME设为长度为10的字符字段
+
+3、将ADDRESS设为长度50的字符字段，而且缺省值为深圳。
+
+4、将YEAR设为日期字段。
+
+数据类型
+DATE YYYY-MM-DD  eg: 20100810 | 2010-08-10 范围 1000-01-01 到 9999-12-31, 中间的-可以不写, 也可以用人其他字符代提 比如 , * !(非数字字母)
+DATETIME YYYY-MM-DD HH:MM:SS eg: 20100810153510 | 2010-08-10 15:35:10 范围: 1000-01-01 00:00:00 到 2037-12-31 23:59:59
+
+YEAR 
+* 两位数值 1~99 1~69=>2001-2069, 70~99=>1970~1999
+* 四位数值 1901~2155
+* 两位数字符串 "00"~"99". 同两位数值
+* 四位数字符串 同四位数值
+
+BOOL和BOOLEAN  TINYINT(1)的别名, 值: 0|1
+BIGINT -9 223 372 036 854 775 808~9 223 372 036 854 775 807 
+INT -2 147 483 648 ~ 2 147 483 647
+
+
+
+1.  SET NAMES 'utf8'; 
+它相当于下面的三句指令： 
+SET character_set_client = utf8; 
+SET character_set_results = utf8; 
+SET character_set_connection = utf8; 
+
+2. 创建数据库 
+mysql> create database name character set utf8; 
+
+3. 创建表
+CREATE TABLE `type` ( 
+`id` int(10) unsigned NOT NULL auto_increment, 
+`flag_deleted` enum('Y','N') character set utf8 NOT NULL default 'N', 
+`flag_type` int(5) NOT NULL default '0', 
+`type_name` varchar(50) character set utf8 NOT NULL default '', 
+PRIMARY KEY (`id`) 
+)  DEFAULT CHARSET=utf8; 
+
+4. 修改数据库成utf8的.
+mysql> alter database name character set utf8; 
+
+5. 修改表默认用utf8.
+mysql> alter table type character set utf8; 
+
+6. 修改字段用utf8
+mysql> alter table type modify type_name varchar(50) CHARACTER SET utf8;
+
+
+卸载：
+
+1、mysql删除，一个文件都不能留
+	sudo rm /usr/local/mysql
+	sudo rm -rf /usr/local/mysql*
+2、sudo rm -rf /var/db/receipts/com.mysql.*
+
+
+
+如果忘记密码,强行修改:
+step1： 停止Mysql服务
+step2： 进入终端输入：cd /usr/local/mysql/bin/ 回车后 登录管理员权限 sudo su 回车后输入以下命令来禁止mysql验证功能 ./mysqld_safe --skip-grant-tables & 回车后mysql会自动重启（偏好设置中mysql的状态会变成running）
+step3.  输入命令 ./mysql 回车后，输入命令 FLUSH PRIVILEGES;  回车后，输入命令 ALTER USER 'root'@'localhost' IDENTIFIED BY '你的新密码';
+
+
+ps aux | grep mysq*
+
+
+1) ps a 显示现行终端机下的所有程序，包括其他用户的程序。
+2）ps -A 显示所有程序。 
+3）ps c 列出程序时，显示每个程序真正的指令名称，而不包含路径，参数或常驻服务的标示。 
+4）ps -e 此参数的效果和指定"A"参数相同。 
+5）ps e 列出程序时，显示每个程序所使用的环境变量。 
+6）ps f 用ASCII字符显示树状结构，表达程序间的相互关系。 
+7）ps -H 显示树状结构，表示程序间的相互关系。 
+8）ps -N 显示所有的程序，除了执行ps指令终端机下的程序之外。 
+9）ps s 采用程序信号的格式显示程序状况。 
+10）ps S 列出程序时，包括已中断的子程序资料。 
+11）ps -t 　指定终端机编号，并列出属于该终端机的程序的状况。 
+12）ps u 　以用户为主的格式来显示程序状况。 
+13）ps x 　显示所有程序，不以终端机来区分。
+ps是显示当前状态处于running的进程，grep表示在这些里搜索，而ps aux是显示所有进程和其状态。
+
+
+修改配置文件 配置字符集
+   	sudo cp /usr/local/mysql/support-files/my-medium.cnf /etc/my.cnf
+
+	sudo vi /etc/my.cnf
+
+	[client]部分加入：
+
+	default-character-set=utf8
+
+	[mysqld]部分加入：
+
+	character-set-server=utf8
+
+ 	修改完毕之后再启动mysql
+
+
+1、show engines;  查看支持的表类型
+2、select varsion();查看数据库版本
+3、desc table_name；查看表结构
+4、show create table produnct;  查看创建的表结构
+5、show table status like ‘表名’;
+6、alter table produnct engine = MyISAM;
+
+
+索引的目的在于提高查询效率，可以类比字典，如果要查“mysql”这个单词，我们肯定需要定位到m字母，然后从下往下找到y字母，再找到剩下的sql。如果没有索引，那么你可能需要把所有单词看一遍才能找到你想要的，如果我想找到m开头的单词呢？或者ze开头的单词呢？是不是觉得如果没有索引，这个事情根本无法完成？
+
+除了词典，生活中随处可见索引的例子，如火车站的车次表、图书的目录等。它们的原理都是一样的，通过不断的缩小想要获得数据的范围来筛选出最终想要的结果，同时把随机的事件变成顺序的事件，也就是我们总是通过同一种查找方式来锁定数据。
+
+
+
+
+查看索引
+mysql> show index from tblname;
+mysql> show keys from tblname;
+· Table
+表的名称。
+· Non_unique
+如果索引不能包括重复词，则为0。如果可以，则为1。
+· Key_name
+索引的名称。
+· Seq_in_index
+索引中的列序列号，从1开始。
+· Column_name
+列名称。
+· Collation
+列以什么方式存储在索引中。在MySQL中，有值‘A’（升序）或NULL（无分类）。
+· Cardinality
+索引中唯一值的数目的估计值。通过运行ANALYZE TABLE或myisamchk -a可以更新。基数根据被存储为整数的统计数据来计数，所以即使对于小型表，该值也没有必要是精确的。基数越大，当进行联合时，MySQL使用该索引的机 会就越大。
+· Sub_part
+如果列只是被部分地编入索引，则为被编入索引的字符的数目。如果整列被编入索引，则为NULL。
+· Packed
+指示关键字如何被压缩。如果没有被压缩，则为NULL。
+· Null
+如果列含有NULL，则含有YES。如果没有，则该列含有NO。
+· Index_type
+用过的索引方法（BTREE, FULLTEXT, HASH, RTREE）。
+· Comment
+
+
+create index index1 on mytable(id);  //创建普通索引
+
+create index index1 on mytable(id);  //创建普通索引
+
+表定义：
+CREATE TABLE mytable(id INT NOT NULL,username VARCHAR(16) NOT NULL,index index1(username))
+CREATE TABLE mytable(id INT NOT NULL Primary key,username VARCHAR(16) NOT NULL,index index1(username))
+
+唯一索引直接指定：
+Create TABLE tableName ( [...], UNIQUE [indexName](tableColumns(length));  
+
+
+
+组合索引
+
+一个表中含有多个单列索引不代表是组合索引,通俗一点讲 组合索引是:包含多个字段但是只有索引名称
+
+
+全文索引
+
+InnoDB引擎对FULLTEXT索引的支持是MySQL5.6新引入的特性，之前只有MyISAM引擎支持FULLTEXT索引。
+
+
+总体说下
+
+PRIMARY, INDEX, UNIQUE 这3种是一类
+
+PRIMARY 主键。 就是 唯一 且 不能为空。
+
+INDEX 索引，普通的
+
+UNIQUE 唯一索引。 不允许有重复。
+
+FULLTEXT 是全文索引，用于在一篇文章中，检索文本信息的。
+
+MYSQL的索引类型：PRIMARY, INDEX,UNIQUE,FULLTEXT,SPAIAL 有什么区别？各适用于什么场合？
+
+举个例子来说，比如你在为某商场做一个会员卡的系统。
+这个系统有一个会员表
+有下列字段：
+会员编号 INT
+会员姓名 VARCHAR(10)
+会员身份证号码 VARCHAR(18)
+会员电话 VARCHAR(10)
+会员住址 VARCHAR(50)
+会员备注信息 TEXT
+
+那么这个 会员编号，作为主键，使用 PRIMARY
+会员姓名 如果要建索引的话，那么就是普通的 INDEX
+会员身份证号码 如果要建索引的话，那么可以选择 UNIQUE （唯一的，不允许重复）
+会员备注信息 ， 如果需要建索引的话，可以选择 FULLTEXT，全文搜索。
+
+不过 FULLTEXT 用于搜索很长一篇文章的时候，效果最好。
+用在比较短的文本，如果就一两行字的，普通的 INDEX 也可以。
+
+ 在mysql中MyISAM, InnoDB都支持空间列（存储空间数据类型的列）
+
+
+SPAIAL空间索引有以下特性：
+
+    只有myisam和innodb（mysql5.7.5以上版本）的表支持空间索引。
+    被索引的列必须非NULL
+    在mysql5.7中，列的前缀长度属性被禁用。空间索引直接索引完整宽度的列
+
+MySQL常用命令：
+	•	显示当前服务器版本：SELECT VERSION(); 
+	•	显示当前日期时间：SELECT NOW(); 
+	•	显示当前用户： SELECT USER();
+MySQL语句规范：
+	•	1、关键字与函数名称全部大写
+	•	2、数据库名称，表名称，字段名称全部小写
+	•	3、SQL语句必须以分号结尾；
+
+
+首先我们先普及一下常识：
+1、char（n）和varchar（n）中括号中n代表字符的个数，并不代表字节个数，所以当使用了中文的时候(UTF8)意味着可以插入m个中文，但是实际会占用m*3个字节。
+2、同时char和varchar最大的区别就在于char不管实际value都会占用n个字符的空间，而varchar只会占用实际字符应该占用的空间+1，并且实际空间+1<=n。
+3、超过char和varchar的n设置后，字符串会被截断。
+4、char的上限为255字节，varchar的上限65535字节，text的上限为65535。
+5、char在存储的时候会截断尾部的空格，varchar和text不会。
+6、varchar会使用1-3个字节来存储长度，text不会。
+下图可以非常明显的看到结果：
+Value
+CHAR(4)
+Storage Required
+VARCHAR(4)
+Storage Required
+''
+'    '
+4 bytes
+''
+1 byte
+'ab'
+'ab  '
+4 bytes
+'ab'
+3 bytes
+'abcd'
+'abcd'
+4 bytes
+'abcd'
+5 bytes
+'abcdefgh'
+'abcd'
+4 bytes
+'abcd'
+5 bytes
+ 
+ 
+ 
+char
+定长，最大255字节。存储空间未满，会在数据右侧填充空格。
+varchar
+不定长，最大65536字节，当varchar长度小于4时,自动的把varchar转换成char.。
+Blob
+存储二进制字符串
+TinyBlob 最大 255字节
+Blob 最大 65K
+MediumBlob 最大 16M
+LongBlob 最大 4G
+Text
+存储大文本
+TINYTEXT: 256 bytes TEXT: 65,535 bytes => ~64kb MEDIUMTEXT: 16,777,215 bytes => ~16MB LONGTEXT: 4,294,967,295 bytes => ~4GB
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+总体来说：
+1、char，存定长，速度快，存在空间浪费的可能，会处理尾部空格，上限255。
+2、varchar，存变长，速度慢，不存在空间浪费，不处理尾部空格，上限65535，但是有存储长度实际65532最大可用。
+3、text，存变长大数据，速度慢，不存在空间浪费，不处理尾部空格，上限65535，会用额外空间存放数据长度，顾可以全部使用65535。
+ 
+接下来，我们说说这个场景的问题：
+当varchar（n）后面的n非常大的时候我们是使用varchar好，还是text好呢？这是个明显的量变引发质变的问题。我们从2个方面考虑，第一是空间，第二是性能。
+首先从空间方面：
+从官方文档中我们可以得知当varchar大于某些数值的时候，其会自动转换为text，大概规则如下：
+	◦	大于varchar（255）变为 tinytext
+	◦	大于varchar（500）变为 text
+	◦	大于varchar（20000）变为 mediumtext
+所以对于过大的内容使用varchar和text没有太多区别。
+其次从性能方面：
+索引会是影响性能的最关键因素，而对于text来说，只能添加前缀索引，并且前缀索引最大只能达到1000字节。
+而貌似varhcar可以添加全部索引，但是经过测试，其实也不是。由于会进行内部的转换，所以long varchar其实也只能添加1000字节的索引，如果超长了会自动截断。
+
+
+
+Mysql中的InnoDB和MyISAM是在使用MySQL中最常用的两个表类型，各有优缺点.两种类型最主要的差别就是 InnoDB 支持事务处理与外键和行级锁.而MyISAM不支持.所以Myisam往往就容易被人认为只适合在小项目中使用。但是从数据库需求角度讲,要求99.9%的稳定性，方便的扩展性和高可用性来说的话，那MyISAM绝对应该是首选。MyISAM类型的表强调的是性能，其执行数度比InnoDB类型更快， 只是不提供事务支持.大部分项目是读多写少的项目，而Myisam的读性能是比innodb强不少的. db.opt 文件，那这个文件是干什么用的呢？如果你用vi等编辑器打开看的话，内容很简单，是用来记录该库的默认字符集编码和字符集排序规则用的 ibdata用来储存文件的数据,而数据库名的文件夹里面的那些表文件只是结构而已,小心,万小心不能删除它 ibdata1：系统表空间文件，存储InnoDB系统信息和用户数据库表数据和索引，所有表共用。.ibd文件：单表表空间文件，每个表使用一个表空间文件（file per table），存放用户数据库表数据和索引。日志文件： ib_logfile1、ib_logfile2 基本概念 1、字符(Character)是指人类语言中最小的表义符号。例如'A'、'B'等； 2、 给定一系列字符，对每个字符赋予一个数值，用数值来代表对应的字符，这一数值就是字符的编码(Encoding)。例如，我们给字符'A'赋予数值0，给字符'B'赋予数值1，则0就是字符'A'的编码； 3、 给定一系列字符并赋予对应的编码后，所有这些字符和编码对组成的集合就是字符集(Character Set)。例如，给定字符列表为{'A','B'}时，{'A'=>0, 'B'=>1}就是一个字符集； 4、 字符序(Collation)是指在同一字符集内字符之间的比较规则； 5、 确定字符序后，才能在一个字符集上定义什么是等价的字符，以及字符之间的大小关系； 6、 每个字符序唯一对应一种字符集，但一个字符集可以对应多种字符序，其中有一个是默认字符序(Default Collation)； 7、 MySQL中的字符序名称遵从命名惯例：以字符序对应的字符集名称开头；以_ci(表示大小写不敏感)、_cs(表示大小写敏感)或_bin(表示按编码值比较)结尾。例如：在字符序``utf8_general_ci''下，字符``a''和``A''是等价的； MySQL字符集设置 8、 系统变量： – character_set_server：默认的内部操作字符集 – character_set_client：客户端来源数据使用的字符集 – character_set_connection：连接层字符集 – character_set_results：查询结果字符集 – character_set_database：当前选中数据库的默认字符集 – character_set_system：系统元数据(字段名等)字符集 – 还有以collation_开头的同上面对应的变量，用来描述字符序。 9、 用introducer指定文本字符串的字符集： 为什么要设置字符集 设置字符集主要是解决乱码问题，由于中文和英文编码不同导致，中文出现乱码，所以一般都设置为utf8格式 不同的字符集和编码占用的字节不同，选择适合的编码会提高数据库性能 1、show variables like '%char%'; 检查默认安装的MySQL的字符集 character_set_database和character_set_server依然是latin1的字符集，也就是说mysql后续创建的表都是latin1字符集的，不是utf8，会造成一些麻烦。所以有必要修改my.cnf，在修改my.cnf之前一定要关闭mysql进程，不然会遇到mysql的sock不能连接的问题。 MySQL5对字符集的指定可以细化到一个数据库，其中的一张表，乃至其中的一个字段。 我们安装或编译MySQL时，它会让我们指定一个默认的字符集----latin1,用以指定在进行数据库操作时以哪种编码与数据库进行数据传输。Mysql内部默认的就是latin1，虽然它支持中文但是一般情况下咱们还是要把它给改成utf-8编码。 使用Create table 创建数据表时，如果没有明确指定任何字符集，则新创建数据表的字符集将由MySQL配置文件里的character-set-server选择的设置决定。 1、修改配置文件 配置字符集 sudo cp /usr/local/mysql/support-files/my-medium.cnf /etc/my.cnf sudo vi /etc/my.cnf [client]部分加入： default-character-set=utf8 [mysqld]部分加入： character-set-server=utf8 修改完毕之后再启动mysql 2、创建数据库时指定编码 create database 数据库名字 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci; utf8_general_ci 设置排序方式 3、通过sql命令 SET NAMES 'utf8'来指定一个字符集为UTF-8 4、可以使用 SET CHARACTER SET ‘utf8’命令，将客户端的字符集和select查询结果上的字符集设置为UTF-8 utf8 和utf-8 的区别： 本质上没有区别。“UTF-8”是标准写法，在Windows下边英文不区分大小写，所以也可以写成“utf-8”。“UTF-8”也可以把中间的“-”省略，写成“UTF8”。一般程序都能识别，但也有例外（如下文），为了严格一点，最好用标准的大写“UTF-8”。 在MySQL数据库中只能使用“utf8” 　　在MySQL的命令模式中只能使用“utf8”，不能使用“utf-8”，也就是说在PHP程序中只能使用“set names utf8(不加小横杠)”，如果你加了“-”此行命令将不会生效，但是在PHP中header时却要加上“-”，因为IE不认识没杠的“utf8”
+
+
+增加字段：
+ALTER TABLE table_name ADD field_name field_type;
+
+修改原字段名称及类型：
+ALTER TABLE table_name CHANGE old_field_name new_field_name field_type;
+
+删除字段：
+ALTER TABLE table_name DROP field_name
+
+
+举例
+修改为自增
+alter table tb_name modify id int auto_increment primary key
+
+修改字段默认值
+alter table tablename alter column drop default; (若本身存在默认值，则先删除)
+alter table tablename alter column set default 't5';(若本身不存在则可以直接设定)
+
+增加主键
+alter table tabelname add new_field_id int(5) unsigned default 0 not null auto_increment ,add primary key (new_field_id);
+
+增加一个新列
+alter table t2 add d timestamp;
+alter table infos add ex tinyint not null default '0';
+
+删除列
+alter table t2 drop column c;
+
+重命名列
+alter table t1 change a b integer;
+
+改变列的类型
+alter table t1 change b b bigint not null;
+alter table infos change list list tinyint not null default '0';
+
+重命名表
+alter table t1 rename t2;
+
+加索引
+alter table tablename add index 索引名 (字段名1[，字段名2 ⋯]);
+alter table tablename add index emp_name (name);
+
+加主关键字的索引
+alter table tablename add primary key(id);
+
+加唯一限制条件的索引
+alter table tablename add unique emp_name2(cardnumber);
+
+删除某个索引5
+alter table tablename drop index emp_name;
+
+
+导入数据库
+mysql -u root -p databasename < db.sql
+
+// etc/my.cnf [mysqld] 如果不写默认 -u后面用户名会拼接 @localhost
+bind-address=''
+
+GRANT ALL PRIVILEGES ON *.* TO '账号'@'%' IDENTIFIED BY '密码' WITH GRANT OPTION;
+
+
+
+
+
+
+
+
