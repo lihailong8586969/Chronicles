@@ -17,7 +17,6 @@ func pow(x, n, lim float64) float64 {
 
 		// 在 if 的简短语句中声明的变量同样可以在任何对应的 else 块中使用。
 
-
 	}
 	return lim
 }
