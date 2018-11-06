@@ -21,3 +21,9 @@
 // 不得导入源码中未使用到的 package
 
 // 如果一个包被导入多次，则这个包只会被导入 1 次
+
+import{
+	
+	// 还能直接用 url 写
+	socketio "https://github.com/googollee/go-socket.io"
+}
