@@ -7,6 +7,8 @@ import (
 	"math"
 )
 
+// fmt 是 format 的缩写
+
 // 依次导入
 // import "fmt"
 // import "math"

@@ -9,4 +9,18 @@ func main() {
 	
 		fmt.Println(i)
 	}
+
+	// while 型
+	i=1;
+	for i<=100 {
+	
+		fmt.Println(i);
+		i++;
+	}
+
+	// while 死循环
+	for{
+
+
+	}
 }
