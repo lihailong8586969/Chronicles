@@ -71,7 +71,7 @@ func main() {
 	}
 	v := Vertex{1, 2}
 	v.X = 4
-	fmt.Println(v.X)
+	fmt.Println("v.x=" , v.X)
 
 	// 结构体文法
     // 结构体文法表示通过结构体字段的值作为列表来新分配一个结构体。
