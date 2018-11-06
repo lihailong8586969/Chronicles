@@ -14,7 +14,7 @@ func main() {
 	fmt.Println("done")
 
 
-	// 输出结果如下 : 
+	// 输出结果如下 :
 	// counting
 	// done
 	// 9
