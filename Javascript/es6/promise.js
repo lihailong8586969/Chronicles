@@ -1,35 +1,9 @@
-// https://segmentfault.com/a/1190000012806637
+const promise = new Promise(function(resolve, reject) {
+  // ... some code
 
-
- setTimeout(function(){
-     console.log('定时器开始啦')
- });
- 
- new Promise(function(resolve){
-     console.log('马上执行for循环啦');
-     for(var i = 0; i < 10000; i++){
-         i == 99 && resolve();
-     }
- }).then(function(){
-     console.log('执行then函数啦')
- });
- 
- console.log('代码执行结束');
-
-// 马上执行for循环啦
-// 代码执行结束
-// 执行then函数啦
-// 定时器开始啦
-
-
-new Promise(function(resolve){ 
-
-	console.log("Promise"); 
-
-	// 如果没有 resolve , 不执行 then
-	resolve();
-
-}).then(function(){ 
-
-	console.log("then") 
-})
+  if (/* 异步操作成功 */){
+    resolve(value);
+  } else {
+    reject(error);
+  }
+});
