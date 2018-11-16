@@ -25,3 +25,13 @@ touch love_{1..10}_shiyanlou.txt
 ls \*.txt
 
 
+cd /home/shiyanlou/Code
+mkdir web-server && cd web-server
+
+sudo apt-get update
+sudo apt-get install htppie
+
+
+
+
+
