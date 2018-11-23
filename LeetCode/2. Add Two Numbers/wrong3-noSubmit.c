@@ -1,3 +1,5 @@
+// 这个错是因为，我以为两个数组是等长的，谁知道是可以为不等长的。
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -10,11 +12,8 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
     struct ListNode* p = (struct ListNode*)malloc(sizeof(struct ListNode)*1);
     p->next=NULL; // 必须加这个，不然报member access within misaligned address错误
     
-    if(l1->next!=NULL && l2->next!=NULL){
-        
-        p->next = addTwoNumbers(l1->next,l2->next);
-    }else{
-        
+    if(l1==NULL&l2==NULL){
+
         p->val = (l1->val+l2->val)%10;
     
         if(l1->val+l2->val>9){
@@ -25,6 +24,15 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
             p->next=overflow;
         }
         return p;
+    }else{
+        
+        if(l1!=NULL&&l2==NULL){
+
+            addTwoNumbers(l1->next,l2);
+        }else if(l1!=NULL&&l2!=NULL){
+
+            addTwoNumbers(l1->next,l2);
+        }
     }
     
     if(l1->val+l2->val>9){
