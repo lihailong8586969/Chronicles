@@ -1,3 +1,8 @@
+// Go 语言声明变量的特点是 : 先写你想到的
+// 如你想使用一个int类型的管道变量 , 你是：
+// myChannel channel int ;
+// 即先想到你需要一个变量，然后这个变量是 Channel ，其次具体的Channel类型是 int
+
 // 常量定义
 const NAME string = "fd"
 
