@@ -3,6 +3,11 @@
 // myChannel channel int ;
 // 即先想到你需要一个变量，然后这个变量是 Channel ，其次具体的Channel类型是 int
 
+
+
+// Go程序抽象的基本原则依赖于接口而不是实现，优先使用组合而不是继承。
+
+
 // 常量定义
 const NAME string = "fd"
 
