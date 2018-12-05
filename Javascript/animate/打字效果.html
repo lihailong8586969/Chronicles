@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id="p1">啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+</body>
+<script>
+    var p1 = document.getElementById("p1");
+    var p2 = p1.innerText.split('');
+    p1.innerText='';
+    var i=0;
+    var qqq = setInterval(function () {
+        if (i<p2.length){
+            p1.innerText +=p2[i];
+            i++;
+        }else {
+            clearInterval(qqq);
+        }
+    },100);
+</script>
+</html>

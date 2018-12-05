@@ -2,6 +2,8 @@
 // 原项目 ： https://github.com/ccfromstar/resume
 
 
+var m = 0;
+
 var Coder = function(dom) {
 
 	this._dom = dom;
