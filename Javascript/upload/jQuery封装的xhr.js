@@ -1,4 +1,5 @@
 
+// 原链接：https://segmentfault.com/a/1190000008791342
 
 // jQuery封装了xhr的实现, 也可以使用jQuery的ajax获得上传进度，示例代码：
 

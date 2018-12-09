@@ -1,3 +1,8 @@
+
+
+// 原链接：https://segmentfault.com/a/1190000008791342
+
+
 var formData = new FormData(); 
 formData.append("file", document.getElementById('file').files[0]); 
 formData.append("token", token_value); // 其他参数按这样子加入

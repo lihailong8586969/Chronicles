@@ -1,3 +1,7 @@
+
+
+// 原链接：https://segmentfault.com/a/1190000008791342
+
 var formData = new FormData();
 formData.append('token', token_value);  // csrf token
 formData.append("works", document.getElementById('file').files[0]); // file
