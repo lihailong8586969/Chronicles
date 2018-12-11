@@ -1,0 +1,26 @@
+/* 
+
+原文链接：
+https://www.zhangxinxu.com/wordpress/2011/05/css%E5%AE%9E%E7%8E%B0%E5%90%84%E4%B8%AA%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E7%9A%84%E5%9E%82%E7%9B%B4%E7%BF%BB%E8%BD%AC%E6%B0%B4%E5%B9%B3%E7%BF%BB%E8%BD%AC%E6%95%88%E6%9E%9C/
+
+*/
+
+/*水平翻转*/
+.flipx {
+    -moz-transform:scaleX(-1);
+    -webkit-transform:scaleX(-1);
+    -o-transform:scaleX(-1);
+    transform:scaleX(-1);
+    /*IE*/
+    filter:FlipH;
+}
+
+/*垂直翻转*/
+.flipy {
+    -moz-transform:scaleY(-1);
+    -webkit-transform:scaleY(-1);
+    -o-transform:scaleY(-1);
+    transform:scaleY(-1);
+    /*IE*/
+    filter:FlipV;
+}
