@@ -1,0 +1,5 @@
+针对命令行的扩展
+
+http://php.net/manual/zh/refs.utilspec.cmdline.php
+
+readline() 函数
