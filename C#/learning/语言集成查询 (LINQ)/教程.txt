@@ -1,0 +1,3 @@
+// https://docs.microsoft.com/zh-cn/dotnet/csharp/linq/index
+
+// https://docs.microsoft.com/zh-cn/dotnet/csharp/linq/
