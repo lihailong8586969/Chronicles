@@ -1,5 +1,8 @@
 // https://www.cnblogs.com/gangle/p/9285094.html
 
+// 但是在子控件中不能创建线程( 我想应该就是这样 )
+
+
 // 方法一：使用Thread类
 public static void Main(string[] args)
 {
