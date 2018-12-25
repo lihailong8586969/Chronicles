@@ -1,0 +1,3 @@
+Extension namespace cannot be loaded
+
+Installation is not implemented for windows yet
