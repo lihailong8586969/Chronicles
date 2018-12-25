@@ -1,7 +1,8 @@
 <?php
 
 
-// 在执行完 composer dump 之后，必须添加此行代码，否则不会引入composer的
+// 在执行完 composer dump 之后，会重新生成 autoload.php 文件
+// 必须添加此行代码，否则不会引入composer的
 require __DIR__ . '/vendor/autoload.php';
 
 
