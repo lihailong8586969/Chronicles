@@ -1,0 +1,6 @@
+
+整体环境不会缺这就是少那，tm 的 Zephir 你就不能告诉我到底是哪个缺少了 ？ 就只告诉我 zephir installation is not implemented for windows yet aborting
+
+烦死你了 ！！！！！！
+
+让我浪费快1天时间还没配置好 ！！！！！！！！！！！！！！！
